@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bungabunga Park Reporter</title>
+    <style>
+        body { font-family: sans-serif; max-width: 400px; margin: 20px auto; padding: 20px; background: #f0fdf4; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ddd; }
+        button { background: #22c55e; color: white; font-weight: bold; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🌳 Bungabunga Report</h2>
+        <input type="text" id="title" placeholder="Issue Name">
+        <button onclick="sendReport()" id="btn">Submit Report</button>
+    </div>
+
+    <script>
+        async function sendReport() {
+            const btn = document.getElementById('btn');
+            const title = document.getElementById('title').value;
+            const SB_URL = "https://mmvhqfgyciwzvictvdp.supabase.co/functions/v1/bungabunga-handler";
+            const SB_KEY = "sb_publishable_jEgvoZaOyxvnJzGXpdVm4g_wn65XI_V";
+
+            btn.innerText = "Connecting...";
+            try {
+                const response = await fetch(SB_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY },
+                    body: JSON.stringify({ title: title })
+                });
+                const data = await response.json();
+                alert("SUCCESS: " + data.message);
+            } catch (err) {
+                alert("ERROR: " + err.message + "\nCheck if your phone data is on!");
+            }
+            btn.innerText = "Submit Report";
+        }
+    </script>
+</body>
+</html>
