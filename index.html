@@ -27,8 +27,8 @@
     </div>
     <script>
         const SB_URL = "https://mmvhqfgyciwzvictdvp.supabase.co"; 
-        // PASTE YOUR LEGACY SERVICE_ROLE KEY IN THE QUOTES BELOW
-        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdmhxZmd5Y2l3enZpY3Z0ZHZwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTI0ODczNCwiZXhwIjoyMDg2ODI0NzM0fQ.PMiQ_1WZUCfHqrosVck2Y90DR-iMSE9uEH28dima6v4";
+        // PASTE YOUR PUBLIC ANON KEY BELOW
+        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdmhxZmd5Y2l3enZpY3Z0ZHZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyNDg3MzQsImV4cCI6MjA4NjgyNDczNH0.MS9pymQ2VFPdt8yxz76POgTTYaasYDMcj8irrYPvdRs";
 
         document.getElementById('reportForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -38,6 +38,7 @@
             const name = document.getElementById('name').value;
             const desc = document.getElementById('description').value;
             try {
+                // Notice the name is now "bungabunga-handler"
                 const response = await fetch(`${SB_URL}/functions/v1/bungabunga-handler`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SB_KEY}` },
@@ -55,6 +56,3 @@
     </script>
 </body>
 </html>
-
-
-
