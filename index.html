@@ -39,7 +39,11 @@
             try {
                 const response = await fetch(SB_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SB_KEY}` },
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        'Authorization': `Bearer ${SB_KEY}`,
+                        'apikey': SB_KEY // ADD THIS LINE
+                    },
                     body: JSON.stringify({ name, description: desc })
                 });
                 const result = await response.text();
@@ -54,3 +58,4 @@
     </script>
 </body>
 </html>
+
