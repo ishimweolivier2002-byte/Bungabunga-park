@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bungabunga Report</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-green-50 flex items-center justify-center min-h-screen p-4">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="text-2xl font-bold mb-6 text-green-800 flex items-center gap-2">🌳 Bungabunga Report</h1>
-        <form id="reportForm" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Issue Name</label>
-                <input type="text" id="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Description</label>
-                <textarea id="description" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Photo Upload</label>
-                <input type="file" id="photo" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
-            </div>
-            <button type="submit" id="submitBtn" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-md hover:bg-green-700">Submit Report</button>
-        </form>
-    </div>
-    <script>
-        const SB_URL = "https://mmvhqfgyciwzvictdvp.supabase.co"; 
+<script>
+        // I have combined the full address here
+        const SB_URL = "https://mmvhqfgyciwzvictdvp.supabase.co/functions/v1/bungabunga-handler";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdmhxZmd5Y2l3enZpY3Z0ZHZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyNDg3MzQsImV4cCI6MjA4NjgyNDczNH0.MS9pymQ2VFPdt8yxz76POgTTYaasYDMcj8irrYPvdRs";
 
         document.getElementById('reportForm').addEventListener('submit', async (e) => {
@@ -37,8 +11,8 @@
             const name = document.getElementById('name').value;
             const desc = document.getElementById('description').value;
             try {
-                // Notice the name is now "bungabunga-handler"
-                const response = await fetch(`${SB_URL}/functions/v1/bungabunga-handler`, {
+                // We use ONLY SB_URL here because it already contains the full path
+                const response = await fetch(SB_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SB_KEY}` },
                     body: JSON.stringify({ name, description: desc })
@@ -53,6 +27,3 @@
             }
         });
     </script>
-</body>
-</html>
-
